@@ -21,16 +21,32 @@ interface contractAddressesTitleInterface {
 }
 
 const Home: NextPage = () => {
-	const { chainId } = useMoralis();
+	const { isWeb3Enabled, chainId } = useMoralis();
 	const addresses: contractAddressesInterface = networkMapping;
 	const chainString = !!chainId ? parseInt(chainId).toString() : '31337';
 	const titleregistryAddress = addresses[chainString]!['TitleRegistry']![0];
-	const { loading, error, data: listedTitles } = useQuery(GET_ACTIVE_ITEMS);
+	const {
+		loading,
+		error: subgraphQueryError,
+		data: listedTitles,
+	} = useQuery(GET_ACTIVE_ITEMS);
 
 	return (
-		<>
-			<div className=''>Hi!</div>
-		</>
+		<div className='container mx-auto'>
+			<h1 className='py-4 px-4 text-2xl font-bold'>Listados recientemente</h1>
+			<div className='flex flex-wrap'>
+				{loading || !listedTitles ? (
+					<div>Cargando...</div>
+				) : (
+					listedTitles.activeTitles.map((title: titleInterface) => {
+						const { price, titleAddress, tokenId, seller } = title;
+						console.log(titleregistryAddress);
+						return <div></div>;
+					})
+				)}
+				;
+			</div>
+		</div>
 	);
 };
 
