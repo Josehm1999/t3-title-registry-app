@@ -8,7 +8,7 @@ import { z } from 'zod';
 export const serverSchema = z.object({
 	NODE_ENV: z.enum(['development', 'test', 'production']),
 	chainId: z.string().min(1),
-    masterKey: z.string().min(1) 
+    masterKey: z.string().min(1)
 });
 
 /**
@@ -19,6 +19,8 @@ export const serverSchema = z.object({
 export const clientSchema = z.object({
 	NEXT_PUBLIC_APP_ID: z.string().min(1),
 	NEXT_PUBLIC_SERVER_URL: z.string().min(1),
+	NEXT_PUBLIC_GRAPH_LOCAL_NODE: z.string().min(1),
+	NEXT_PUBLIC_GRAPH_REAL_NODE: z.string().min(1),
 });
 
 /**
@@ -30,5 +32,7 @@ export const clientSchema = z.object({
 export const clientEnv = {
 	NEXT_PUBLIC_APP_ID: process.env.NEXT_PUBLIC_APP_ID,
 	NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
+    NEXT_PUBLIC_GRAPH_LOCAL_NODE: process.env.NEXT_PUBLIC_GRAPH_LOCAL_NODE,
+    NEXT_PUBLIC_GRAPH_REAL_NODE: process.env.NEXT_PUBLIC_GRAPH_REAL_NODE
 };
 
